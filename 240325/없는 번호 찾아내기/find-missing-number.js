@@ -11,11 +11,5 @@ for(let i =1; i <= 28; i ++) {
     }
 }
 
-// if(result.length <= 0) {
-//     console.log(arr[26]);
-//     console.log(arr[27]);
-//     return;
-// }
-
 console.log(Math.min(...result));
 console.log(Math.max(...result));
