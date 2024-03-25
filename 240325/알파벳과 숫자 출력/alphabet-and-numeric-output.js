@@ -9,7 +9,7 @@ for(let i = 0; i < input; i++) {
     const arr = [];
     for(let j = 0; j < input-i; j++) {
         arr.push(String.fromCharCode(startStr++));
-        if(startStr > 91) {
+        if(startStr > 90) {
             startStr = 65;
         }    
     }
