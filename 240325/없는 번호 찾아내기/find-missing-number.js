@@ -9,10 +9,6 @@ for(let i =1; i <= 28; i ++) {
     if(arr[i-1] !== i) {
         result.push(i);
     }
-
-    if(result.length >= 2) {
-        break;
-    }
 }
 
 if(result.length <= 0) {
