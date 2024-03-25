@@ -1,16 +1,25 @@
 const fs = require('fs');
 const input = fs.readFileSync('/dev/stdin').toString();
 
-const arr = input.split('\n').map(it => Number(it)).sort((a,b) => a-b);
+const arr = input.split('\n').map(it => Number(it)).sort((a,b) => a - b);
 
 const result = [];
 
-arr.reduce((pre, cur) => {
-    if(Math.abs(pre - cur) >= 2) {  
-        result.push(pre+1);
+for(let i =1; i <= 28; i ++) {
+    if(arr[i-1] !== i) {
+        result.push(i);
     }
-    return cur;
-});
+
+    if(result.length >= 2) {
+        break;
+    }
+}
+
+if(result.length <= 0) {
+    console.log(arr[26]);
+    console.log(arr[27]);
+    return;
+}
 
 console.log(Math.min(...result));
 console.log(Math.max(...result));
