@@ -16,10 +16,12 @@ const table = Array.from({length: len}, () => []);
 const actions = {}
 
 let minTime = Number.MAX_SAFE_INTEGER;
+let maxTime = Number.MIN_SAFE_INTEGER;
 
 input.map((it) => {
     const time = it.split(' ')[1];
     minTime = Math.min(time, minTime);
+    maxTime = Math.max(maxTime, time);
     actions[time] = {
         ...actions[time],
         [it.split(' ')[0]]: {
@@ -35,10 +37,7 @@ let count = 0;
 let sushi = 0;
 let consumer = [];
 
-let time = minTime - 1;
-
-while(true) {
-    time++;
+for(let time = minTime - 1; time <= maxTime; time++) {
     const action = actions[time];
     if(!action) {
         const last = table.pop();
