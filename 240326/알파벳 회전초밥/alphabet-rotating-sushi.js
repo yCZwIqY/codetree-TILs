@@ -13,7 +13,7 @@ b.split('').map(it => {
 let cnt = 1;
 
 idx.reduce((pre, cur) => {
-    if(pre > cur) {
+    if(pre >= cur) {
         cnt++;
     }
     return cur;
