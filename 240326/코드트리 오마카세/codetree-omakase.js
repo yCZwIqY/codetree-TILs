@@ -59,14 +59,15 @@ while(true) {
         const name = it.name;
         const position = it.position;
         const num = it.num;
-
         if(table[position].some(dish => dish.name === name)) {
+            const eat = table[position].filter(dish => dish.name === name).length;
             table[position] = table[position].filter(dish => dish.name !== name);
-            sushi--;
-            return num - 1 <= 0 ? null : {
+        
+            sushi-=eat;
+            return num - eat <= 0 ? null : {
                 name,
                 position,
-                num: num - 1
+                num: num - eat
             }
         }
 
@@ -74,6 +75,9 @@ while(true) {
     })
     .filter(it => it!==null);
 
+    // console.log('[[', time, ']]');
+    // console.log('consumer', consumer);
+    // console.log('sushi', table);
     //rotation
     const last = table.pop();
     table.unshift(last);
