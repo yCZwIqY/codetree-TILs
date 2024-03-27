@@ -37,14 +37,15 @@ let count = 0;
 let sushi = 0;
 let consumer = [];
 
-for(let time = minTime - 1; time <= maxTime; time++) {
+for(let time = minTime; time <= maxTime; time++) {
+    //회전
     const action = actions[time];
     if(!action) {
         const last = table.pop();
         table.unshift(last);
         continue;
     }
-
+    
     if(action[MAKE_SUSHI]) {
         count++;
         sushi++;
@@ -57,6 +58,7 @@ for(let time = minTime - 1; time <= maxTime; time++) {
         consumer.push(action[VISIT_CUSTOMER]);
     }
 
+    //자신의 앞에있는 초밥을 먹음
     consumer.forEach(it => {
         const name = it.name;
         const position = it.position;
@@ -70,13 +72,14 @@ for(let time = minTime - 1; time <= maxTime; time++) {
         }
     });
 
-
+    //떠난 손님의 초밥 폐기
     table.forEach(it => {
         it = it.map(i => {
                 return consumer.some(c => c.name === it.name && c.num <= 0) ? null : i;
             }).filter(i => i!== null);
-    })
-    
+    });
+
+    //회전    
     const last = table.pop();
     table.unshift(last);
 
