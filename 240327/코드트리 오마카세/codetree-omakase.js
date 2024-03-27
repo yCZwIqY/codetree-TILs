@@ -18,6 +18,7 @@ const actions = {}
 let minTime = Number.MAX_SAFE_INTEGER;
 let maxTime = Number.MIN_SAFE_INTEGER;
 
+//시간별 동작
 input.map((it) => {
     const time = it.split(' ')[1];
     minTime = Math.min(time, minTime);
@@ -46,6 +47,7 @@ for(let time = minTime; time <= maxTime; time++) {
         continue;
     }
     
+    //초밥을 테이블에 둠
     if(action[MAKE_SUSHI]) {
         count++;
         sushi++;
@@ -53,6 +55,7 @@ for(let time = minTime; time <= maxTime; time++) {
         table[position].push(action[MAKE_SUSHI]);
     }
 
+    //손님 입장
     if(action[VISIT_CUSTOMER]) {
         count++;
         consumer.push(action[VISIT_CUSTOMER]);
@@ -84,12 +87,13 @@ for(let time = minTime; time <= maxTime; time++) {
     table.unshift(last);
 
 
-
+    //사진 촬영
     if(action[TAKE_PHOTO]) {
         count++;
         console.log(consumer.filter(it => it.num > 0).length, sushi);
     }
 
+    //모든 명령을 수행하면 종료
     if(count >= q) {
         return;
     }
