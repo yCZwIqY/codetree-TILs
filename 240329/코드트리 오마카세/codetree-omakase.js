@@ -11,12 +11,11 @@ const TAKE_PHOTO = 300;
 let sushiCount = 0;
 const table = new Array(len);
 let customer = new Array();
-let prevTime = Number.MAX_SAFE_INTEGER;
 
 const actions = [];
 input.forEach(it => {
     const [type, time, position, name, num] = it.split(' ').map((x) => (isNaN(x) ? x : Number(x)));
-    prevTime = Math.min(prevTime, time);
+    
     actions.push({ time, type, position, name, num });
 });
 
@@ -25,7 +24,7 @@ for(let i = 0; i < len; i++) {
     table[i] = [];
 }
 
-
+let prevTime = 0;
 for (const action of actions) {
     const { time, type, position, name, num } = action;
 
@@ -51,6 +50,7 @@ for (const action of actions) {
         const name = it.name;
         const customerPosition = it.position;
         const num = it.num;
+
         if((table[customerPosition] ?? []).some(dish => dish.name === name)) {
             const eat = table[customerPosition].filter(dish => dish.name === name).length;
             table[customerPosition] = table[customerPosition].filter(dish => dish.name !== name);
@@ -67,17 +67,15 @@ for (const action of actions) {
     });
 
     customer = customer.filter(c => c.num > 0);
-    
+
+
     if(type === TAKE_PHOTO) {
         console.log(customer.length, sushiCount);
     }
-
     
-    // 시간이 변경되었을 때 테이블을 회전시킴
-    if (prevTime !== time) {
-        const r = (prevTime - time) % len;
-        const temp = table.splice(table.length - r, table.length);
-        table.unshift(...temp);
-        prevTime = time;
-    }
+    const r = (time - prevTime) % len;
+    const temp = table.splice(table.length - r, table.length);
+    table.unshift(...temp.reverse());
+    prevTime = time;
+
 }
