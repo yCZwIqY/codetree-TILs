@@ -11,34 +11,21 @@ const MAKE_SUSHI = '100';
 const VISIT_CUSTOMER = '200';
 const TAKE_PHOTO = '300';
 
-let table = Array.from({length: len}, () => []);
-
-const actions = []
-
-let minTime = Number.MAX_SAFE_INTEGER;
-let maxTime = Number.MIN_SAFE_INTEGER;
+let table = new Array(len);
+table.fill([]);
+const actions = new Array(q)
 
 //시간별 동작
-input.map((it) => {
+input.map((it, index) => {
     const time = it.split(' ')[1];
-    minTime = Math.min(time, minTime);
-    maxTime = Math.max(maxTime, time);
-    actions.push({
+    actions[index] = {
         time: Number(time),
         [it.split(' ')[0]]: {
             position: it.split(' ')[2],
             name: it.split(' ')[3],
             num: it.split(' ')[4],
         }
-    })
-    // actions[time] = {
-    //     ...actions[time],
-    //     [it.split(' ')[0]]: {
-    //         position: it.split(' ')[2],
-    //         name: it.split(' ')[3],
-    //         num: it.split(' ')[4],
-    //     }
-    // } 
+    };
 });
 
 
@@ -89,15 +76,8 @@ let consumer = [];
 
 makeSushi(actions[0]);
 
+let cnt = 1;
 actions.reduce((pre, cur) => {
-    
-    // console.log("====================== 현재 시간: " + cur.time + " ======================");
-    // console.log("Table: ");
-    // console.log(table);
-    // console.log("------------------------------------------------");
-    // console.log("Consumer: ");
-    // console.log(consumer);
-
     if(pre) {
         //지나간 시간만큼 로테이션
         const r = (cur.time - pre.time) % len;
@@ -109,68 +89,3 @@ actions.reduce((pre, cur) => {
 
     return cur;
 });
-
-
-
-// for(let time = minTime; time <= maxTime;) {
-
-//     const action = actions[time];
-
-//     //회전
-//     if(!action) {
-//         const last = table.pop();
-//         table.unshift(last);
-//         continue;
-//     }
-    
-//     //초밥을 테이블에 둠
-//     if(action[MAKE_SUSHI]) {
-//         count++;
-//         sushi++;
-//         const position = action[MAKE_SUSHI].position;
-//         table[position].push(action[MAKE_SUSHI]);
-//     }
-
-//     //손님 입장
-//     if(action[VISIT_CUSTOMER]) {
-//         count++;
-//         consumer.push(action[VISIT_CUSTOMER]);
-//     }
-
-//     //자신의 앞에있는 초밥을 먹음
-//     consumer.forEach(it => {
-//         const name = it.name;
-//         const position = it.position;
-//         const num = it.num;
-//         if(table[position].some(dish => dish.name === name)) {
-//             const eat = table[position].filter(dish => dish.name === name).length;
-//             table[position] = table[position].filter(dish => dish.name !== name);
-        
-//             sushi-=eat;
-//             it.num = num - eat
-//         }
-//     });
-
-//     //떠난 손님의 초밥 폐기
-//     table.forEach(it => {
-//         it = it.map(i => {
-//                 return consumer.some(c => c.name === it.name && c.num <= 0) ? null : i;
-//             }).filter(i => i!== null);
-//     });
-
-//     //회전
-//     const last = table.pop();
-//     table.unshift(last);
-
-
-//     //사진 촬영
-//     if(action[TAKE_PHOTO]) {
-//         count++;
-//         console.log(consumer.filter(it => it.num > 0).length, sushi);
-//     }
-
-//     //모든 명령을 수행하면 종료
-//     if(count >= q) {
-//         return;
-//     }
-// }
