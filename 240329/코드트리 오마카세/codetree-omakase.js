@@ -11,9 +11,8 @@ const MAKE_SUSHI = '100';
 const VISIT_CUSTOMER = '200';
 const TAKE_PHOTO = '300';
 
-let table = new Array(len);
-table.fill([]);
-const actions = new Array(q)
+let table = Array.from({length: len}, () => []);
+const actions = new Array(q);
 
 //시간별 동작
 input.map((it, index) => {
@@ -34,7 +33,9 @@ const makeSushi = (action) => {
     if(action[MAKE_SUSHI]) {
         sushi++;
         const position = action[MAKE_SUSHI].position;
-        table[position].push(action[MAKE_SUSHI]);
+        table[position] 
+            ? table[position].push(action[MAKE_SUSHI])
+            : table[position] = [action[MAKE_SUSHI]];
     }
 
     //손님 입장
@@ -76,8 +77,15 @@ let consumer = [];
 
 makeSushi(actions[0]);
 
-let cnt = 1;
 actions.reduce((pre, cur) => {
+
+    // console.log("====================== 현재 시간: " + cur.time + " ======================");
+    // console.log("Table: ");
+    // console.log(table);
+    // console.log("------------------------------------------------");
+    // console.log("Consumer: ");
+    // console.log(consumer);
+
     if(pre) {
         //지나간 시간만큼 로테이션
         const r = (cur.time - pre.time) % len;
