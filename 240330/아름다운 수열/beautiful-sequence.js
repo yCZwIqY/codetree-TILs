@@ -8,7 +8,7 @@ const b = input.map(it => Number(it));
 
 const allCase = new Array();
 const min = Math.min(...b);
-const max = 10 - Math.min(...b);
+const max = 100 - Math.min(...b);
 
 function permute(arr, current = []) {
     if (arr.length === 0) {
