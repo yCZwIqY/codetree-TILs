@@ -1,5 +1,5 @@
 const fs = require('fs');
-const input = fs.readFileSync('/dev/stdin').toString().split('\n');
+const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 const [n, m] = input.shift().split(' ').map(it => Number(it));
 
 const coinPos = input;
