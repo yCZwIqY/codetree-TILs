@@ -3,7 +3,7 @@ const input = fs.readFileSync('/dev/stdin').toString().trim();
 
 let n = input;
 let count = 1;
-while(count < 10) {
+while(true) {
     count++;
     const x = n.toString()
             .split('')
@@ -14,9 +14,9 @@ while(count < 10) {
             .pop();
     const y = input.split('').pop();
 
-    n = x+y;
+    n = y+x;
 
-    if(n===input) {
+    if(Number(n)===Number(input)) {
         console.log(count);
         return;
     }
