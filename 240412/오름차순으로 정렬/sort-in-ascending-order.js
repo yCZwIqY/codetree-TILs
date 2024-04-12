@@ -3,13 +3,13 @@ const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 const n = Number(input.shift());
 const arr = input.shift().split(' ').map(it => Number(it));
 
-for(let i = 0; i < n; i++) {
-    const minIdx = arr.findIndex(it => it === Math.min(...arr.slice(i, n)));
-
-    if(i !== minIdx) {
-        let temp = arr[i];
-        arr[i] = arr[minIdx];
-        arr[minIdx] = temp;
+for(let i =0; i<n; i++) {
+    for(let j = 0; j<n; j++) {
+        if(arr[i]<arr[j]) {
+            let temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
     }
 }
 
