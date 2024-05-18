@@ -106,7 +106,7 @@ for(let i of input) {
 
 let result = []
 it = list.begin();
-while (it !== list.end()) {  
+while (it !== list.end() && it) {  
     result.push(it.data);
     it = it.next;         
 }
