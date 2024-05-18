@@ -91,12 +91,14 @@ for(let i of input) {
     
     switch(command) {
         case 'L':
+            if(it === list.begin()) break;
             it = it.prev;
             break;
         case 'P':
             list.insert(it, value);
             break;
         case 'R':
+            if(it === list.end()) break;
             it = it.next;
             break;
         case 'D':
