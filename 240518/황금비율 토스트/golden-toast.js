@@ -104,11 +104,11 @@ for(let i of input) {
     }
 }
 
-let result = ''
+let result = []
 it = list.begin();
 while (it !== list.end()) {  
-    result+=it.data;
+    result.push(it.data);
     it = it.next;         
 }
 
-console.log(result)
+console.log(result.join(''))
