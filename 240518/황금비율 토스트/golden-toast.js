@@ -100,7 +100,11 @@ for(let i of input) {
             it = it.next;
             break;
         case 'D':
-            it = list.erase(it)
+            if(it === list.end()) break;
+            it = list.erase(it);
+            break;
+        default:
+            break;
     }
 }
 
