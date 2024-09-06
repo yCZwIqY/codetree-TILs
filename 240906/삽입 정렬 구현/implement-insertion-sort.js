@@ -1,7 +1,7 @@
 const fs = require('fs');
 const input = fs.readFileSync('/dev/stdin').toString().split('\n');
 const n = parseInt(input.shift());
-const arr = input.shift().split(' ');
+const arr = input.shift().split(' ').map(it => parseInt(it));
 
 for(let i = 1; i < n; i ++) {
     let j = i - 1;
