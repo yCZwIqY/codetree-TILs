@@ -2,17 +2,14 @@ const fs = require('fs');
 const input = fs.readFileSync('/dev/stdin').toString().trim();
 const len = parseInt(input.split('\n').shift());
 let arr = input.split('\n')[1].split(' ');
+const d = Math.max(...arr.map(it => it.length));
+arr = arr.map(it => it.padStart(d, 0));
 
-const d = Math.max(...arr.map(it => it.length)) - 1;
-
-for(let i = d; i >= 0; i--) {
+for(let i = d - 1; i >= 0; i--) {
     const tempArr = Array.from({length: 10}, () => []);
 
     for(let j = 0; j < len; j++) {
         let digit = parseInt(arr[j].split('')[i]);
-        if(digit === NaN) {
-            digit = 0;
-        }
         tempArr[digit].push(arr[j]);
     }
 
@@ -24,7 +21,6 @@ for(let i = d; i >= 0; i--) {
     }
 
     arr = storedArr;
-
 }
 
-console.log(arr.join(' '))
+console.log(arr.map(it => parseInt(it)).join(' '))
