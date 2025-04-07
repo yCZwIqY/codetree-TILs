@@ -2,6 +2,12 @@ const fs = require("fs");
 const input = fs.readFileSync(0).toString().trim().split('\n');
 const bracketStr = input[0];
 // Please write your code here.
+
+if (bracketStr.length % 2 !== 0 ||  bracketStr[0] === ')') {
+    console.log('No');
+    return;
+}
+
 const stack = [];
 bracketStr.split('').forEach(it => {
     if(it === '(') {
@@ -11,4 +17,4 @@ bracketStr.split('').forEach(it => {
     }
 });
 
-console.log(stack.length <= 0 ? 'Yes' : 'No');
+console.log(stack.length > 0 ?  'No' : 'Yes');
